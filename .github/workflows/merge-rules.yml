@@ -6,7 +6,7 @@ on:
   # 1. 允许你手动在 Actions 页面点击按钮来运行
   workflow_dispatch:
   
-  # 2. 定时触发：这里设置为每天 UTC 时间的 0 点 0 分运行（相当于北京时间早上8点）
+  # 2. 定时触发：设置为每天 UTC 时间的 0 点 0 分运行（相当于北京时间早上8点）
   schedule:
     - cron: '0 0 * * *'
 
@@ -27,7 +27,7 @@ jobs:
       # 第二步：下载所有的规则文件，并合并到一个临时文件里
       - name: Download and Merge
         run: |
-          # 下面是你提供的上游规则列表
+          # 下面是你最新提供的上游规则列表
           echo "开始下载规则..."
           curl -sL "https://raw.githubusercontent.com/rentianyu/Ad-set-hosts/master/adguard" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt" >> temp_list.txt
@@ -36,10 +36,9 @@ jobs:
           curl -sL "https://cdn.jsdelivr.net/gh/sbwml/halflife-list@master/ad-pc.txt" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/8680/GOODBYEADS/master/data/rules/adblock.txt" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" >> temp_list.txt
-          curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt" >> temp_list.txt
-          curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockfilterslite.txt" >> temp_list.txt
+          curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" >> temp_list.txt
+          curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockfilters.txt" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/light.txt" >> temp_list.txt
-          curl -sL "https://lingeringsound.github.io/adblock_auto/Rules/adblock_auto.txt" >> temp_list.txt
           echo "规则下载完成！"
 
       # 第三步：处理合并后的文件：去重、排序、移除无效行
@@ -57,5 +56,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git add final-rules.txt
           # 下面的提交信息可以自定义
-          git commit -m "自动更新AdGuard规则" -a || echo "没有内容更新"
+          git commit -m "自动更新AdGuard规则 (更新上游列表)" -a || echo "没有内容更新"
           git push
