@@ -38,7 +38,7 @@ jobs:
           curl -sL "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" >> temp_list.txt
           curl -sL "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockfilters.txt" >> temp_list.txt
-          curl -sL "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/light.txt" >> temp_list.txt
+          curl -sL "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt" >> temp_list.txt
           echo "规则下载完成！"
 
       # 第三步：处理合并后的文件：去重、排序、移除无效行
