@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
   
   # 2. 定时触发：这里设置为每天凌晨2点 (UTC时间) 自动运行一次
-  # 你可以修改 cron 的值，或者把下面这行用 '#' 注释掉来取消自动运行
   schedule:
     - cron: '0 2 * * *'
 
@@ -15,6 +14,10 @@ jobs:
   build:
     # 运行环境，使用最新的Ubuntu系统
     runs-on: ubuntu-latest
+    
+    # 【修复】就是在这里添加了权限设置
+    permissions:
+      contents: write
 
     steps:
       # 第一步：固定写法，让机器人能访问你的仓库文件
